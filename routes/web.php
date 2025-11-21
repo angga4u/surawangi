@@ -2,15 +2,29 @@
 
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AspirasiController;
 use Illuminate\Support\Facades\Route;
 
+// HALAMAN BERANDA
 Route::get('/', [NewsController::class, 'index'])->name('home');
 
-// Halaman Profil
+// HALAMAN PROFIL
 Route::get('/profil', [PageController::class, 'profile'])->name('profile.index');
 
-// Daftar berita per kategori (pakai binding slug)
+// Daftar berita berdasarkan kategori (pakai slug)
 Route::get('/berita/{category:slug}', [NewsController::class, 'category'])->name('news.index');
 
-// Detail berita berdasarkan kategori + slug
+// Detail berita berdasarkan kategori + slug berita
 Route::get('/berita/{category:slug}/{slug}', [NewsController::class, 'show'])->name('news.show');
+
+// Form aspirasi untuk masyarakat
+Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.index');
+
+// Proses simpan aspirasi
+Route::post('/aspirasi', [AspirasiController::class, 'store'])->name('aspirasi.store');
+
+// Halaman admin/DPRD melihat semua aspirasi
+Route::get('/aspirasi/list', [AspirasiController::class, 'list'])->name('aspirasi.list');
+
+// Hapus aspirasi (TAMBAHKAN ROUTE INI)
+Route::delete('/aspirasi/{id}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');

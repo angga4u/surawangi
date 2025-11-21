@@ -6,133 +6,180 @@
 @section('content')
     <x-navbar />
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- ===== HERO IMAGE ===== -->
-        <section class="relative rounded-3xl overflow-hidden shadow-xl mb-12 group">
-            <img
-                src="{{ asset("/storage/$news->thumbnail") }}"
-                alt="{{ $news->title }}"
-                class="w-full h-72 sm:h-80 md:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
-            >
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+    <main class="bg-gray-50 min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-            <div class="absolute bottom-8 left-8 right-8 text-white z-10">
-                <span
-                    class="inline-block bg-blue-600 px-4 py-1.5 rounded-full text-xs font-semibold mb-3 shadow-lg">
-                    {{ $news->category->name }}
-                </span>
-                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 drop-shadow-lg">
-                    {{ $news->title }}
-                </h1>
-                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-200">
-                    <span class="flex items-center gap-2">
-                        @svg('heroicon-o-calendar', 'w-4 h-4')
-                        {{ $news->published_at->format('d F Y') }}
-                    </span>
-                    <span class="w-1 h-1 rounded-full bg-gray-400"></span>
-                    <span class="flex items-center gap-2">
-                        @svg('heroicon-o-clock', 'w-4 h-4')
-                        {{ $news->reading_time }} menit baca
-                    </span>
-                    <span class="w-1 h-1 rounded-full bg-gray-400"></span>
-                    <span class="flex items-center gap-2">
-                        @svg('heroicon-o-eye', 'w-4 h-4')
-                        {{ $news->views }} pembaca
-                    </span>
+            <div class="grid lg:grid-cols-3 gap-8">
+
+                <!-- Main Content Area -->
+                <div class="lg:col-span-2">
+
+                    <!-- Article Container -->
+                    <article class="bg-white rounded-lg overflow-hidden">
+
+                        <!-- Article Header -->
+                        <div class="px-6 sm:px-10 pt-8 sm:pt-10 pb-6">
+
+                            <!-- Breadcrumb -->
+                            <nav class="text-sm text-gray-500 mb-5">
+                                <a href="/" class="hover:text-gray-900">Beranda</a>
+                                <span class="mx-2">/</span>
+                                <a href="/berita" class="hover:text-gray-900">Berita</a>
+                                <span class="mx-2">/</span>
+                                <span class="text-gray-900">{{ $news->category->name }}</span>
+                            </nav>
+
+                            <!-- Category Badge -->
+                            <div class="mb-5">
+                                <span class="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-blue-600 text-white rounded">
+                                    {{ $news->category->name }}
+                                </span>
+                            </div>
+
+                            <!-- Title -->
+                            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-6">
+                                {{ $news->title }}
+                            </h1>
+
+                            <!-- Meta Info -->
+                            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 pb-6 border-b border-gray-200">
+                                <time class="flex items-center gap-1.5">
+                                    @svg('heroicon-o-calendar', 'w-4 h-4')
+                                    {{ $news->published_at->translatedFormat('d F Y') }}
+                                </time>
+                                <span class="text-gray-300">•</span>
+                                <span class="flex items-center gap-1.5">
+                                    @svg('heroicon-o-clock', 'w-4 h-4')
+                                    {{ $news->reading_time }} menit
+                                </span>
+                                <span class="text-gray-300">•</span>
+                                <span class="flex items-center gap-1.5">
+                                    @svg('heroicon-o-eye', 'w-4 h-4')
+                                    {{ number_format($news->views) }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Featured Image -->
+                        <figure class="px-6 sm:px-10">
+                            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-gray-100">
+                                <img
+                                    src="{{ asset("/storage/$news->thumbnail") }}"
+                                    alt="{{ $news->title }}"
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            @if (!is_null($news->thumbnail_information))
+                                <figcaption class="mt-3 text-sm text-gray-600 italic">
+                                    {{ $news->thumbnail_information }}
+                                </figcaption>
+                            @endif
+                        </figure>
+
+                        <!-- Article Content -->
+                        <div class="px-6 sm:px-10 py-8">
+                            <div class="prose prose-base max-w-none
+                                prose-headings:font-bold prose-headings:text-gray-900
+                                prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+                                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                                prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-2
+                                prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-5
+                                prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                                prose-strong:text-gray-900 prose-strong:font-semibold
+                                prose-ul:my-6 prose-ol:my-6
+                                prose-li:text-gray-700 prose-li:mb-2
+                                prose-blockquote:border-l-4 prose-blockquote:border-blue-600 prose-blockquote:pl-4 prose-blockquote:py-1 prose-blockquote:my-6 prose-blockquote:italic prose-blockquote:text-gray-700
+                                prose-img:rounded-lg prose-img:my-8
+                                prose-code:text-blue-600 prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+                                prose-pre:bg-gray-900 prose-pre:rounded-lg prose-pre:my-6">
+                                {!! str($news->content)->sanitizeHtml() !!}
+                            </div>
+                        </div>
+
+                        <!-- Share Section -->
+                        <div class="px-6 sm:px-10 pb-8 pt-6 border-t border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-gray-700">Bagikan:</span>
+                                <div class="flex items-center gap-2">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
+                                        target="_blank"
+                                        class="w-9 h-9 flex items-center justify-center rounded bg-gray-100 text-gray-600 hover:bg-blue-600 hover:text-white transition-colors">
+                                        @svg('bi-facebook', 'w-4 h-4')
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($news->title) }}"
+                                        target="_blank"
+                                        class="w-9 h-9 flex items-center justify-center rounded bg-gray-100 text-gray-600 hover:bg-gray-900 hover:text-white transition-colors">
+                                        @svg('bi-twitter-x', 'w-4 h-4')
+                                    </a>
+                                    <a href="https://wa.me/?text={{ urlencode($news->title . ' ' . request()->fullUrl()) }}"
+                                        target="_blank"
+                                        class="w-9 h-9 flex items-center justify-center rounded bg-gray-100 text-gray-600 hover:bg-green-600 hover:text-white transition-colors">
+                                        @svg('bi-whatsapp', 'w-4 h-4')
+                                    </a>
+                                    <button onclick="copyUrl()"
+                                        class="w-9 h-9 flex items-center justify-center rounded bg-gray-100 text-gray-600 hover:bg-gray-700 hover:text-white transition-colors">
+                                        @svg('bi-link-45deg', 'w-5 h-5')
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </article>
                 </div>
+
+                <!-- Sidebar -->
+                <aside class="lg:col-span-1">
+                    <div class="sticky top-6 space-y-8">
+
+                        <!-- Popular News -->
+                        <section class="bg-white rounded-lg overflow-hidden">
+                            <div class="bg-gray-900 px-5 py-3">
+                                <h2 class="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
+                                    @svg('bi-fire', 'w-4 h-4 text-orange-400')
+                                    Terpopuler
+                                </h2>
+                            </div>
+                            <div class="p-5 space-y-5">
+                                @foreach ($popularNews as $popular)
+                                    <div class="flex gap-3">
+                                        <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded bg-gray-100 text-gray-700 text-xs font-bold">
+                                            {{ $loop->iteration }}
+                                        </span>
+                                        <div class="flex-1 min-w-0">
+                                            <x-card.news.popular-news-card :number="$loop->iteration" :post="$popular" />
+                                        </div>
+                                    </div>
+                                    @if (!$loop->last)
+                                        <div class="border-b border-gray-100"></div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </section>
+
+                        <!-- Related News -->
+                        <section class="bg-white rounded-lg overflow-hidden">
+                            <div class="bg-blue-600 px-5 py-3">
+                                <h2 class="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
+                                    @svg('bi-newspaper', 'w-4 h-4')
+                                    Berita Terkait
+                                </h2>
+                            </div>
+                            <div class="p-5 space-y-5">
+                                @foreach ($relatedNews as $related)
+                                    <div>
+                                        <x-card.news.related-news-card :post="$related" />
+                                    </div>
+                                    @if (!$loop->last)
+                                        <div class="border-b border-gray-100"></div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </section>
+
+                    </div>
+                </aside>
+
             </div>
-        </section>
-
-        <!-- ===== MAIN CONTENT ===== -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <!-- === ARTICLE CONTENT === -->
-            <article class="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="p-8 sm:p-10">
-                    <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                        {!! str($news->content)->sanitizeHtml() !!}
-                    </div>
-
-                    @if (!is_null($news->thumbnail_information))
-                        <div class="mt-8 p-4 bg-gray-50 rounded-xl border-l-4 border-blue-600">
-                            <p class="text-sm text-gray-600 italic">
-                                {{ $news->thumbnail_information }}
-                            </p>
-                        </div>
-                    @endif
-
-                    <!-- === SHARE SECTION === -->
-                    <div class="mt-10 pt-8 border-t border-gray-200">
-                        <h3 class="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
-                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-                            </svg>
-                            Bagikan Artikel
-                        </h3>
-                        <div class="flex flex-wrap gap-3">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
-                                target="_blank"
-                                class="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md">
-                                @svg('bi-facebook', 'w-4 h-4')
-                                <span class="text-sm font-medium">Facebook</span>
-                            </a>
-                            <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($news->title) }}"
-                                target="_blank"
-                                class="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md">
-                                @svg('bi-twitter-x', 'w-4 h-4')
-                                <span class="text-sm font-medium">Twitter</span>
-                            </a>
-                            <a href="https://wa.me/?text={{ urlencode($news->title . ' ' . request()->fullUrl()) }}"
-                                target="_blank"
-                                class="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-500 text-white hover:bg-green-600 transition-all duration-300 shadow-sm hover:shadow-md">
-                                @svg('bi-whatsapp', 'w-4 h-4')
-                                <span class="text-sm font-medium">WhatsApp</span>
-                            </a>
-                            <button onclick="copyUrl()"
-                                class="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-600 text-white hover:bg-gray-700 transition-all duration-300 shadow-sm hover:shadow-md">
-                                @svg('bi-share-fill', 'w-4 h-4')
-                                <span class="text-sm font-medium">Salin Link</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- === SIDEBAR === -->
-            <aside class="space-y-8">
-                <!-- POPULAR NEWS -->
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                            @svg('bi-bar-chart', 'w-5 h-5 text-blue-600')
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-900">
-                            Berita Terpopuler
-                        </h3>
-                    </div>
-                    <div class="space-y-4">
-                        @foreach ($popularNews as $news)
-                            <x-card.news.popular-news-card :number="$loop->iteration" :post="$news" />
-                        @endforeach
-                    </div>
-                </div>
-
-                <!-- RELATED NEWS -->
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
-                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                            @svg('bi-newspaper', 'w-5 h-5 text-blue-600')
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-900">
-                            Berita Terkait
-                        </h3>
-                    </div>
-                    <div class="grid gap-4">
-                        @foreach ($relatedNews as $news)
-                            <x-card.news.related-news-card :post="$news" />
-                        @endforeach
-                    </div>
-                </div>
-            </aside>
         </div>
     </main>
 
@@ -144,9 +191,10 @@
         async function copyUrl() {
             try {
                 await navigator.clipboard.writeText(window.location.href);
-                notyf.success("✅ Link artikel berhasil disalin!");
+                notyf.success("Link berhasil disalin");
             } catch (error) {
-                console.error('Gagal menyalin link:', error);
+                console.error('Gagal menyalin:', error);
+                notyf.error("Gagal menyalin link");
             }
         }
     </script>

@@ -73,7 +73,7 @@
                             <div class="w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
                         </div>
                         <div class="text-4xl font-bold mb-1">5+</div>
-                        <div class="text-sm opacity-90 font-medium">Tahun Pengalaman</div>
+                        <div class="text-sm opacity-90 font-medium">Bulan Pengalaman</div>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                             </div>
                             <div class="w-2 h-2 bg-primary/40 rounded-full"></div>
                         </div>
-                        <div class="text-4xl font-bold text-primary mb-1">10K+</div>
+                        <div class="text-4xl font-bold text-primary mb-1">1K+</div>
                         <div class="text-sm text-gray-600 font-medium">Artikel Dipublikasi</div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="w-2 h-2 bg-accent/40 rounded-full"></div>
                         </div>
-                        <div class="text-4xl font-bold text-accent mb-1">50K+</div>
+                        <div class="text-4xl font-bold text-accent mb-1">5K+</div>
                         <div class="text-sm text-gray-600 font-medium">Pembaca Aktif</div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="w-2 h-2 bg-primary/40 rounded-full"></div>
                         </div>
-                        <div class="text-4xl font-bold text-primary mb-1">8</div>
+                        <div class="text-4xl font-bold text-primary mb-1">12</div>
                         <div class="text-sm text-gray-600 font-medium">Kategori Berita</div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
     @if (!$staffs->isEmpty())
     <section class="mb-24">
         <h2 class="text-3xl font-extrabold text-gray-900 border-l-8 border-primary pl-4 mb-10">
-            Tim Redaksi SURAWANGI
+            SURAWANGI Creative Editorial Team
         </h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -271,7 +271,7 @@
             </div>
         </div>
     </section>
-    @endif
+    @endif 
 
 </main>
 
