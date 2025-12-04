@@ -42,7 +42,7 @@
         <div class="space-y-8">
             <!-- Hero Image dengan Overlay Gradient -->
             <div class="relative group overflow-hidden rounded-3xl shadow-2xl">
-                <img src="{{ asset('assets/img/berempat.png') }}" alt="Tim SURAWANGI"
+                <img src="{{ asset('assets/img/angga.JPG') }}" alt="Tim SURAWANGI"
                     class="w-full h-96 object-cover transition-all duration-700 group-hover:scale-110">
 
                 <!-- Gradient Overlay -->
@@ -271,7 +271,7 @@
             </div>
         </div>
     </section>
-    @endif 
+    @endif
 
 </main>
 

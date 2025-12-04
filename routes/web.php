@@ -1,9 +1,3 @@
-<?php
-
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\AspirasiController;
-use Illuminate\Support\Facades\Route;
 
 // HALAMAN BERANDA
 Route::get('/', [NewsController::class, 'index'])->name('home');
@@ -26,5 +20,5 @@ Route::post('/aspirasi', [AspirasiController::class, 'store'])->name('aspirasi.s
 // Halaman admin/DPRD melihat semua aspirasi
 Route::get('/aspirasi/list', [AspirasiController::class, 'list'])->name('aspirasi.list');
 
-// Hapus aspirasi (TAMBAHKAN ROUTE INI)
+// Hapus aspirasi
 Route::delete('/aspirasi/{id}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');

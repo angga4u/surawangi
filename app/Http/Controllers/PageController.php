@@ -25,7 +25,7 @@ class PageController extends Controller
                 ];
             })
             ->toArray();
-        
+
         $staffs = Staff::all();
         $achievements = Achievement::all();
         $contacts = Contact::all();
