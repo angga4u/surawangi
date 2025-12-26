@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* =========================================================
+   🌈 TAILWIND 4 ELEGANT MODERN THEME (ANGGAISS STYLE)
+   ========================================================= */
+
+/* === LARAVEL SOURCE PATH === */
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../../app/View/Components/**/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+/* === VARIAN TAMBAHAN === */
+@custom-variant dark (&:is(.dark *));
+
+/* === 🌸 WARNA DASAR === */
+:root {
+  --background: #f4f7ff;
+  --foreground: #0f172a;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #6366f1;
+  --accent: #a78bfa;
+  --muted: #e2e8f0;
+  --muted-foreground: #475569;
+  --border: #e2e8f0;
+  --radius: 1rem;
+}
+
+/* === 🌙 DARK MODE === */
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #818cf8;
+  --secondary: #6366f1;
+  --accent: #a78bfa;
+  --muted: #1e293b;
+  --muted-foreground: #cbd5e1;
+  --border: #334155;
+}
+
+/* === THEME (Tailwind 4 Inline Mode) === */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --radius-lg: var(--radius);
+}
+
+/* =========================================================
+   🧱 BASE STYLE
+   ========================================================= */
+@layer base {
+  * {
+    @apply border-border outline-none focus:outline-none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-foreground antialiased;
+    background: radial-gradient(circle at top right, #eef2ff 0%, #f9faff 50%, #e0e7ff 100%);
+    min-height: 100vh;
+  }
+
+  a,
+  button {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* =========================================================
+   🏠 HOME & CATEGORY SECTIONS
+   ========================================================= */
+.home-section,
+.category-section {
+  @apply px-8 md:px-16 py-20 relative overflow-hidden;
+  background: linear-gradient(180deg, #f9faff 0%, #eef2ff 100%);
+}
+
+/* === Background dekoratif === */
+.home-section::before,
+.category-section::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
+  filter: blur(130px);
+  z-index: 0;
+}
+
+/* =========================================================
+   🏷️ SECTION TITLE
+   ========================================================= */
+.section-title {
+  @apply text-5xl md:text-6xl font-bold text-center mb-16 relative z-10;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 6px;
+  margin: 15px auto 0;
+  background: linear-gradient(90deg, #6366f1, #a78bfa);
+  border-radius: 9999px;
+  opacity: 0.9;
+}
+
+/* =========================================================
+   🧩 CARD GRID
+   ========================================================= */
+.card-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 relative z-10;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* =========================================================
+   💎 CARD STYLE — Premium News Effect
+   ========================================================= */
+.card {
+  @apply relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/80 border border-white/30 dark:border-slate-700/40 backdrop-blur-xl shadow-2xl transition-all duration-700;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: column;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(99, 102, 241, 0.15),
+    rgba(167, 139, 250, 0.05),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-18px) scale(1.04);
+  box-shadow:
+    0 30px 60px -20px rgba(79, 70, 229, 0.4),
+    0 0 60px rgba(99, 102, 241, 0.15);
+  border-color: var(--primary);
+}
+
+/* === CARD IMAGE === */
+.card img {
+  @apply w-full h-64 object-cover transition-all duration-700;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  transform: scale(1.03);
+}
+
+.card:hover img {
+  transform: scale(1.12);
+  filter: brightness(1.15) saturate(1.2);
+}
+
+/* === Overlay Gradasi di Gambar === */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(79, 70, 229, 0.25), rgba(0, 0, 0, 0.55));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  border-radius: 1.5rem;
+}
+.card:hover::after {
+  opacity: 1;
+}
+
+/* === CARD BODY === */
+.card-body {
+  @apply p-8 relative z-10 text-center;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.7s ease;
+}
+
+.card:hover .card-body {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* === CARD TITLE === */
+.card-title {
+  @apply text-2xl font-extrabold text-gray-900 dark:text-gray-100 mb-4;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: color 0.4s ease;
+}
+
+.card:hover .card-title {
+  letter-spacing: 0.03em;
+}
+
+/* === CARD TEXT === */
+.card-text {
+  @apply text-base text-gray-600 dark:text-gray-300 leading-relaxed;
+  opacity: 0.9;
+  line-height: 1.8;
+  transition: color 0.3s ease;
+}
+
+/* === CARD BUTTON === */
+.card a,
+.card button {
+  @apply mt-6 inline-block px-10 py-3 rounded-full font-semibold text-white shadow-lg;
+  background: linear-gradient(270deg, #4f46e5, #7c3aed, #a78bfa);
+  background-size: 300% 300%;
+  animation: gradientFlow 6s ease infinite;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card a:hover,
+.card button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+}
+
+/* === Animasi Gradien Tombol === */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =========================================================
+   🌀 ANIMATIONS
+   ========================================================= */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.3rem;
+  }
+  .card img {
+    height: 200px;
+  }
+  .card-body {
+    @apply p-6;
+  }
+}
+
+/* =========================================================
+   ✨ HOVER GLOW & DEPTH EFFECT
+   ========================================================= */
+.card:hover {
+  box-shadow:
+    0 20px 50px -15px rgba(79, 70, 229, 0.4),
+    0 0 40px rgba(99, 102, 241, 0.15);
+}
